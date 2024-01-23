@@ -130,7 +130,7 @@ function convertToRomanNumerals(/* num */) {
  */
 function convertNumberToString(numberStr) {
   let result = '';
-  let resultTrim = '';
+
   let word = '';
   for (let i = 0; i < numberStr.length; i += 1) {
     switch (numberStr[i]) {
@@ -176,10 +176,13 @@ function convertNumberToString(numberStr) {
       default:
         word = '';
     }
-    result = `${result}${word} `;
-    resultTrim = result.trimEnd();
+    if (i === numberStr.length - 1) {
+      result = `${result}${word}`;
+    } else {
+      result = `${result}${word} `;
+    }
   }
-  return resultTrim;
+  return result;
 }
 
 /**
