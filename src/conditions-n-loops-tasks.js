@@ -93,7 +93,17 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {}
+function isIsoscelesTriangle(a, b, c) {
+  if (
+    a !== 0 &&
+    b !== 0 &&
+    c !== 0 &&
+    ((a === b && a + b > c) || (a === c && a + c > b) || (c === b && c + b > a))
+  ) {
+    return true;
+  }
+  return false;
+}
 
 /**
  * Converts a number to Roman numerals. The number will be between 1 and 39.
@@ -109,16 +119,75 @@ function isIsoscelesTriangle(/* a, b, c */) {}
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const str = String(num);
+  let result = '';
+  let sym2 = '';
+  let sym1 = '';
+
+  switch (str[str.length - 1]) {
+    case '1':
+      sym1 = 'I';
+      break;
+    case '2':
+      sym1 = 'II';
+      break;
+    case '3':
+      sym1 = 'III';
+      break;
+    case '4':
+      sym1 = 'IV';
+      break;
+    case '5':
+      sym1 = 'V';
+      break;
+    case '6':
+      sym1 = 'VI';
+      break;
+    case '7':
+      sym1 = 'VII';
+      break;
+    case '8':
+      sym1 = 'VIII';
+      break;
+    case '9':
+      sym1 = 'IX';
+      break;
+    case '0':
+      sym1 = '';
+      break;
+    default:
+      sym1 = '';
+  }
+
+  switch (str[str.length - 2]) {
+    case '1':
+      sym2 = 'X';
+      break;
+    case '2':
+      sym2 = 'XX';
+      break;
+    case '3':
+      sym2 = 'XXX';
+      break;
+    default:
+      sym2 = '';
+  }
+
+  if (str.length === 2) {
+    result = `${sym2}${sym1}`;
+  } else {
+    result = `${sym1}`;
+  }
+  return result;
 }
 
 /**
- * Converts a number to a string, replacing digits with words.
+ * Converts a number to a string, replacing digits with syms.
  * In this task, the use of methods of the String and Array classes is not allowed.
  *
  * @param {string} numberStr - The number as a string.
- * @return {string} The number with digits replaced by words.
+ * @return {string} The number with digits replaced by syms.
  *
  * @example:
  *  '1'       => 'one'
@@ -131,55 +200,55 @@ function convertToRomanNumerals(/* num */) {
 function convertNumberToString(numberStr) {
   let result = '';
 
-  let word = '';
+  let sym = '';
   for (let i = 0; i < numberStr.length; i += 1) {
     switch (numberStr[i]) {
       case '0':
-        word = 'zero';
+        sym = 'zero';
         break;
       case '1':
-        word = 'one';
+        sym = 'one';
         break;
       case '2':
-        word = 'two';
+        sym = 'two';
         break;
       case '3':
-        word = 'three';
+        sym = 'three';
         break;
       case '4':
-        word = 'four';
+        sym = 'four';
         break;
       case '5':
-        word = 'five';
+        sym = 'five';
         break;
       case '6':
-        word = 'six';
+        sym = 'six';
         break;
       case '7':
-        word = 'seven';
+        sym = 'seven';
         break;
       case '8':
-        word = 'eight';
+        sym = 'eight';
         break;
       case '9':
-        word = 'nine';
+        sym = 'nine';
         break;
       case '-':
-        word = 'minus';
+        sym = 'minus';
         break;
       case '.':
-        word = 'point';
+        sym = 'point';
         break;
       case ',':
-        word = 'point';
+        sym = 'point';
         break;
       default:
-        word = '';
+        sym = '';
     }
     if (i === numberStr.length - 1) {
-      result = `${result}${word}`;
+      result = `${result}${sym}`;
     } else {
-      result = `${result}${word} `;
+      result = `${result}${sym} `;
     }
   }
   return result;
@@ -222,8 +291,17 @@ function isPalindrome(str) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let result;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      result = i;
+      break;
+    } else {
+      result = -1;
+    }
+  }
+  return result;
 }
 
 /**
