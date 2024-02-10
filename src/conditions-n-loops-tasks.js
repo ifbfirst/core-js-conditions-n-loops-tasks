@@ -418,9 +418,23 @@ function getBalanceIndex(arr) {
  *        ]
  */
 function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+  // let strArr = [];
+  // const arr = [];
+  // let start = 1;
+  // let y;
+  // for (let i = 0; i < size; i += 1) {
+  //   strArr = [];
+  //   for (y = start; y < start + 4; y += 1) {
+  //     strArr.push(y);
+  //   }
+  //   start = y;
+  //   if (i % 2 !== 0) {
+  //     strArr.reverse();
+  //   }
+  //   arr.push(strArr);
+  // }
+  // return arr;
 }
-
 /**
  * Rotates a matrix by 90 degrees clockwise in place.
  * Take into account that the matrix size can be very large. Consider how you can optimize your solution.
@@ -454,8 +468,18 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const newArr = arr;
+  for (let i = 1; i < arr.length; i += 1) {
+    for (let y = 0; y < i; y += 1) {
+      const index = i - y;
+      if (newArr[index] < newArr[index - 1]) {
+        [newArr[index], newArr[index - 1]] = [newArr[index - 1], newArr[index]];
+      } else {
+        y += arr.length;
+      }
+    }
+  }
 }
 
 /**
@@ -477,13 +501,20 @@ function sortByAsc(/* arr */) {
  */
 function shuffleChar(str, iterations) {
   let newStr = str;
-  let str1 = str;
-  for (let i = 0; i < iterations; i += 1) {
-    str1 = newStr;
-    for (let y = 0; y < str1.length; y += 1) {
-      if (y % 2 !== 0) {
-        newStr = `${newStr.replace(`${str1[y]}`, '')}${str1[y]}`;
+  for (let i = 1; i <= iterations; i += 1) {
+    let first = '';
+    let second = '';
+    for (let y = 0; y < newStr.length; y += 1) {
+      if (y % 2 === 0) {
+        first += newStr[y];
       }
+      if (y % 2 === 1) {
+        second += newStr[y];
+      }
+    }
+    newStr = first + second;
+    if (newStr === str) {
+      return shuffleChar(str, iterations % i);
     }
   }
   return newStr;
